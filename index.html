@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUSTODIO - Diócesis de Santa Rosa de Osos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Typography */
+            --font-sans: 'Inter', sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+            
+            /* Colors mapped from original design */
+            --dark-bg: #0b0f19;
+            --white: #ffffff;
+            --black: #000000;
+            
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            
+            --blue-100: #dbeafe;
+            --blue-200: #bfdbfe;
+            --blue-300: #93c5fd;
+            --blue-400: #60a5fa;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --blue-900: #1e3a8a;
+            
+            --red-100: #fee2e2;
+            --red-200: #fecaca;
+            --red-300: #fca5a5;
+            --red-400: #f87171;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --red-800: #991b1b;
+            --red-900: #7f1d1d;
+            
+            --pink-50: #fdf2f8;
+            --pink-100: #fce7f3;
+            --pink-200: #fbcfe8;
+            --pink-300: #f9a8d4;
+            --pink-400: #f472b6;
+            --pink-500: #ec4899;
+            --pink-600: #db2777;
+            
+            --purple-100: #f3e8ff;
+            --purple-200: #e9d5ff;
+            --purple-300: #d8b4fe;
+            --purple-400: #c084fc;
+            --purple-500: #a855f7;
+            --purple-600: #9333ea;
+            --purple-700: #7e22ce;
+            
+            --green-100: #dcfce7;
+            --green-200: #bbf7d0;
+            --green-300: #86efac;
+            --green-400: #4ade80;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            
+            --yellow-200: #fef08a;
+            --yellow-300: #fde047;
+            --yellow-400: #facc15;
+            --yellow-500: #eab308;
+            --yellow-600: #ca8a04;
+            --yellow-900: #713f12;
+            
+            --orange-200: #fed7aa;
+            --orange-400: #fb923c;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+            --orange-900: #7c2d12;
+            
+            --indigo-100: #e0e7ff;
+            --indigo-200: #c7d2fe;
+            --indigo-300: #a5b4fc;
+            --indigo-400: #818cf8;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-900: #312e81;
+
+            /* Effects */
+            --glass-bg: rgba(15, 23, 42, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(-45deg, #0f172a, #2e1065, #1e3a8a, #4c1d95, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: var(--white);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (min-width: 768px) { body { flex-direction: row; } }
+
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+        button, input, select, textarea { font-family: inherit; color: inherit; }
+        button { cursor: pointer; border: none; background: transparent; outline: none; }
+        a { text-decoration: none; color: inherit; }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Generic Utilities */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .w-full { width: 100%; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-10 { margin-bottom: 2.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-10 { margin-top: 2.5rem; }
+        .relative { position: relative; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .block { display: block; }
+        .uppercase { text-transform: uppercase; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            padding: 2rem;
+            border-radius: 1.5rem;
+            transition: all var(--transition-smooth);
+        }
+
+        .glass-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all var(--transition-smooth);
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: left;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .glass-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-btn .icon { font-size: 1.25rem; transition: transform var(--transition-smooth); }
+        .glass-btn:hover .icon { transform: scale(1.1); }
+
+        .emoji-3d {
+            display: inline-block;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.5)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.4));
+            transition: transform var(--transition-bounce);
+        }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+        }
+
+        .tilt-card:hover .emoji-3d {
+            transform: scale(1.15) translateZ(20px) rotate(-5deg);
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+        .animate-ping { animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+            50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+        }
+        .animate-bounce { animation: bounce 3s infinite; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        .app-sidebar {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            z-index: 20;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        @media (min-width: 768px) {
+            .app-sidebar {
+                width: 18rem;
+                height: 100vh;
+                border-right: 1px solid rgba(255,255,255,0.1);
+                border-bottom: none;
+                border-top-right-radius: 1.5rem;
+                border-bottom-right-radius: 1.5rem;
+            }
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            margin-top: 0.5rem;
+        }
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.025em;
+            background: linear-gradient(to right, var(--white), var(--blue-200));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .sidebar-subtitle {
+            font-size: 0.75rem;
+            color: var(--blue-200);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .nav-badge {
+            font-size: 0.625rem;
+            font-weight: 700;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            margin-left: auto;
+            text-transform: uppercase;
+        }
+
+        .app-main {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            height: 100vh;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+        @media (min-width: 768px) { .app-main { padding: 2.5rem; } }
+
+        .view-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 72rem;
+            margin: 0 auto;
+            padding-bottom: 2.5rem;
+        }
+        .view-section.narrow { max-width: 56rem; }
+        .view-section.medium { max-width: 64rem; }
+
+        /* Hero Component */
+        .hero-banner {
+            padding: 2rem;
+            border-radius: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .hero-banner { padding: 3rem; flex-direction: row; text-align: left; }
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            mix-blend-mode: overlay;
+        }
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--slate-900), rgba(15,23,42,0.8), transparent);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            flex-grow: 1;
+            text-align: center;
+        }
+        @media (min-width: 1024px) { .hero-content { text-align: left; } }
+        
+        .hero-tag {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--blue-200);
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        .hero-title {
+            font-size: 2.25rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 20px 25px rgba(0,0,0,0.1), 0 8px 10px rgba(0,0,0,0.1);
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+
+        .btn-crisis {
+            background: linear-gradient(135deg, var(--red-600), var(--red-800));
+            animation: pulse-red 2s infinite;
+            border: 2px solid var(--red-300);
+            color: var(--white);
+            font-weight: 700;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition-smooth);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            width: 100%;
+        }
+        @media (min-width: 1024px) { .btn-crisis { width: auto; } }
+        .btn-crisis:hover { transform: scale(1.05); }
+
+        /* Grids and Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .feature-card:hover { background: rgba(255,255,255,0.05); }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: color var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+        .card-icon-wrap {
+            font-size: 2.25rem;
+            padding: 0.75rem;
+            border-radius: 1rem;
+        }
+        .card-desc {
+            color: var(--gray-300);
+            font-size: 0.875rem;
+            line-height: 1.625;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Module Specific Styling */
+        .border-pink { border-color: rgba(236,72,153,0.3); }
+        .hover-bg-pink:hover { background: rgba(236,72,153,0.1); }
+        .text-pink-hover:hover { color: var(--pink-300); }
+        .bg-pink-icon { background: rgba(236,72,153,0.2); }
+        .glow-pink { position: absolute; right: -2.5rem; top: -2.5rem; width: 8rem; height: 8rem; background: rgba(236,72,153,0.2); filter: blur(24px); border-radius: 50%; }
+
+        .border-purple { border-color: rgba(168,85,247,0.3); }
+        .hover-bg-purple:hover { background: rgba(168,85,247,0.1); }
+        .text-purple-hover:hover { color: var(--purple-300); }
+        .bg-purple-icon { background: rgba(168,85,247,0.2); }
+        .glow-purple { position: absolute; right: -2.5rem; top: -2.5rem; width: 8rem; height: 8rem; background: rgba(168,85,247,0.2); filter: blur(24px); border-radius: 50%; }
+
+        .border-green { border-color: rgba(34,197,94,0.3); }
+        .hover-bg-green:hover { background: rgba(34,197,94,0.1); }
+        .text-green-hover:hover { color: var(--green-300); }
+        .bg-green-icon { background: rgba(34,197,94,0.2); }
+        .glow-green { position: absolute; right: -2.5rem; top: -2.5rem; width: 8rem; height: 8rem; background: rgba(34,197,94,0.2); filter: blur(24px); border-radius: 50%; }
+        
+        .border-blue { border-color: rgba(59,130,246,0.3); }
+        .bg-blue-icon { background: rgba(59,130,246,0.2); }
+        .text-blue-hover:hover { color: var(--blue-400); }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            border-radius: 1.5rem;
+        }
+        @media (min-width: 768px) { .section-header { flex-direction: row; align-items: center; } }
+        
+        .section-header-blue { background: rgba(30,58,138,0.2); border: 1px solid rgba(59,130,246,0.2); }
+        .section-header-indigo { background: rgba(49,46,129,0.2); border: 1px solid rgba(99,102,241,0.2); }
+        .section-header-green { background: rgba(22,163,74,0.1); border: 1px solid rgba(34,197,94,0.2); }
+
+        .form-container {
+            padding: 2rem;
+            border-radius: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            border-left: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        @media (min-width: 768px) { .form-container { padding: 3rem; } }
+
+        .form-alert {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--blue-500);
+            color: var(--gray-200);
+            line-height: 1.6;
+        }
+
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.05);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: max-content;
+            transition: background var(--transition-smooth);
+        }
+        .toggle-wrap:hover { background: rgba(255,255,255,0.1); }
+        
+        /* Toggle Switch Native */
+        .toggle-container {
+            position: relative;
+            display: inline-block;
+            width: 3.5rem;
+            height: 2rem;
+            vertical-align: middle;
+            user-select: none;
+        }
+        .toggle-checkbox {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .toggle-label {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--gray-600);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-label:before {
+            position: absolute;
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            left: 0.25rem;
+            bottom: 0.25rem;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .toggle-checkbox:checked + .toggle-label { background-color: var(--blue-500); }
+        .toggle-checkbox:checked + .toggle-label:before { transform: translateX(1.5rem); }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--blue-100);
+        }
+        .form-input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            color: var(--white);
+            transition: all var(--transition-smooth);
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blue-500);
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06), 0 0 0 1px var(--blue-500);
+        }
+        .form-input::placeholder { color: var(--gray-500); }
+        select.form-input option { background: var(--slate-800); }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--blue-600), var(--indigo-600));
+            color: white;
+            font-weight: 700;
+            padding: 1.25rem 2rem;
+            border-radius: 1rem;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(37,99,235,0.4);
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1.125rem;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--blue-500), var(--indigo-500));
+            box-shadow: 0 0 30px rgba(37,99,235,0.6);
+            transform: translateY(-4px);
+        }
+
+        /* Trazabilidad UI */
+        .track-input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+        @media (min-width: 768px) { .track-input-wrap { flex-direction: row; } }
+        
+        .track-input {
+            font-family: monospace;
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .btn-search {
+            background: var(--indigo-600);
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            box-shadow: 0 0 15px rgba(79,70,229,0.4);
+            transition: all var(--transition-smooth);
+            width: 100%;
+        }
+        @media (min-width: 768px) { .btn-search { width: auto; } }
+        .btn-search:hover { background: var(--indigo-500); transform: translateY(-4px); }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) { .timeline-container { padding-left: 3rem; } }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            left: 1rem;
+            width: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 9999px;
+        }
+        @media (min-width: 768px) { .timeline-container::before { left: 1.25rem; } }
+
+        .timeline-item { position: relative; }
+        .timeline-icon {
+            position: absolute;
+            left: -2.875rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--dark-bg);
+            z-index: 10;
+        }
+        @media (min-width: 768px) { .timeline-icon { left: -3.125rem; } }
+        .icon-green { background: var(--green-500); box-shadow: 0 0 15px rgba(34,197,94,0.6); }
+        .icon-yellow { background: var(--yellow-500); box-shadow: 0 0 20px rgba(234,179,8,0.7); }
+        .icon-gray { background: var(--gray-700); }
+
+        .mask-image-left {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 80%);
+            mask-image: linear-gradient(to right, transparent, black 80%);
+        }
+
+        .menores-banner {
+            padding: 2rem;
+            border-radius: 3rem;
+            background: linear-gradient(to bottom right, rgba(219,39,119,0.3), rgba(147,51,234,0.2), transparent);
+            border: 1px solid rgba(244,114,182,0.3);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        @media (min-width: 768px) { .menores-banner { padding: 3.5rem; } }
+
+        .menores-img {
+            position: absolute;
+            top: 0; right: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        @media (min-width: 768px) { .menores-img { width: 50%; } }
+
+        .action-card {
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: left;
+            transition: all var(--transition-smooth);
+            border: 2px solid transparent;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        .action-card:hover { transform: translateY(-0.5rem); }
+        .action-card.red { border-color: rgba(248,113,113,0.5); }
+        .action-card.red:hover { background: rgba(127,29,29,0.4); }
+        .action-card.orange { border-color: rgba(251,146,60,0.5); }
+        .action-card.orange:hover { background: rgba(124,45,18,0.4); }
+        .action-card.yellow { border-color: rgba(250,204,21,0.5); }
+        .action-card.yellow:hover { background: rgba(113,63,18,0.4); }
+        .action-card.blue { border-color: rgba(96,165,250,0.5); }
+        .action-card.blue:hover { background: rgba(30,58,138,0.4); }
+
+        .pill-btn {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .pill-red { background: var(--red-500); }
+        .pill-orange { background: var(--orange-500); }
+        .pill-yellow { background: var(--yellow-500); }
+        .pill-blue { background: var(--blue-500); }
+
+        /* Formacion */
+        .progress-indicator {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(34,197,94,0.3);
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        @media (min-width: 768px) { .progress-indicator { width: auto; } }
+        
+        .progress-bar-wrap { width: 8rem; height: 0.75rem; background: var(--gray-800); border-radius: 9999px; overflow: hidden; box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06); }
+        .progress-bar-fill { background: linear-gradient(to right, var(--green-500), #34d399); width: 15%; height: 100%; border-radius: 9999px; }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        .filter-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            white-space: nowrap;
+            transition: all var(--transition-smooth);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .filter-btn:hover { background: rgba(255,255,255,0.2); }
+        .filter-btn.active {
+            background: var(--green-600);
+            border-color: transparent;
+            box-shadow: 0 10px 15px -3px rgba(34,197,94,0.3);
+        }
+
+        .course-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            background: rgba(15,23,42,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        .course-img-wrap { height: 12rem; position: relative; overflow: hidden; flex-shrink: 0; }
+        .course-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; mix-blend-mode: luminosity; transition: opacity 0.7s; }
+        .course-card:hover .course-img-wrap img { opacity: 0.8; }
+        .course-gradient { position: absolute; inset: 0; background: linear-gradient(to top, var(--dark-bg), transparent); }
+        .course-tag { position: absolute; top: 1.25rem; left: 1.25rem; background: var(--green-500); color: black; font-weight: 800; padding: 0.375rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        
+        .course-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 10; margin-top: -1.5rem; }
+        @media (min-width: 768px) { .course-body { padding: 2rem; } }
+        .course-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem; transition: color var(--transition-smooth); }
+        .course-card:hover .course-title { color: var(--green-300); }
+        .course-desc { color: var(--gray-300); font-size: 0.875rem; margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .course-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+        .course-time { font-size: 0.75rem; font-weight: 700; color: var(--gray-400); background: rgba(0,0,0,0.5); padding: 0.375rem 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.05); }
+        .btn-course { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-weight: 700; padding: 0.625rem 1.5rem; border-radius: 0.75rem; font-size: 0.875rem; transition: all var(--transition-smooth); display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .btn-course:hover { background: var(--green-500); color: black; border-color: var(--green-500); }
+
+        .stat-card {
+            padding: 2rem;
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-bg-icon { position: absolute; right: -2.5rem; bottom: -2.5rem; opacity: 0.1; font-size: 8rem; transition: transform 0.5s; }
+        .stat-card:hover .stat-bg-icon { transform: scale(1.5); }
+        .stat-value { font-size: 3.75rem; font-weight: 700; font-family: monospace; margin-bottom: 0.5rem; color: white; }
+
+        .spiritual-banner {
+            border-radius: 3rem;
+            overflow: hidden;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            background: rgba(15,23,42,0.5);
+            border: 1px solid rgba(168,85,247,0.2);
+            position: relative;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        @media (min-width: 768px) { .spiritual-banner { padding: 4rem; } }
+        .quote-box { background: rgba(0,0,0,0.4); padding: 2rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(24px); display: inline-block; text-align: left; position: relative; overflow: hidden; }
+        @media (min-width: 768px) { .quote-box { padding: 2.5rem; } }
+
+        .contact-card {
+            padding: 1.5rem;
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid transparent;
+            background: rgba(0,0,0,0.2);
+            gap: 1.5rem;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) { .contact-card { padding: 2rem; } }
+        @media (min-width: 640px) { .contact-card.row { flex-direction: row; align-items: center; } }
+        
+        .contact-btn {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        @media (min-width: 640px) { .contact-btn.row-btn { width: auto; flex-shrink: 0; } }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.show { opacity: 1; pointer-events: auto; }
+        
+        .modal-content-wrap {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            padding: 2rem;
+            max-width: 32rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        @media (min-width: 768px) { .modal-content-wrap { padding: 2.5rem; } }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            color: var(--gray-400);
+            font-size: 1.875rem;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: white; }
+
+        /* Generic classes for injected JS HTML */
+        .text-red-400 { color: var(--red-400); }
+        .text-orange-400 { color: var(--orange-400); }
+        .text-yellow-400 { color: var(--yellow-400); }
+        .text-blue-400 { color: var(--blue-400); }
+        .text-green-400 { color: var(--green-400); }
+        
+        .bg-red-600 { background-color: var(--red-600); }
+        .bg-orange-600 { background-color: var(--orange-600); }
+        .bg-yellow-600 { background-color: var(--yellow-600); }
+        .bg-blue-600 { background-color: var(--blue-600); }
+        .bg-green-600 { background-color: var(--green-600); }
+        
+        .hover-bg-red-500:hover { background-color: var(--red-500); }
+        .hover-bg-orange-500:hover { background-color: var(--orange-500); }
+        .hover-bg-yellow-500:hover { background-color: var(--yellow-500); }
+        .hover-bg-blue-500:hover { background-color: var(--blue-500); }
+        .hover-bg-green-500:hover { background-color: var(--green-500); }
+
+        .modal-btn {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+        .modal-btn:hover { transform: scale(1.05); }
+
+        .custom-list { list-style: none; padding: 0; margin-top: 1rem; margin-bottom: 1.5rem; text-align: left; }
+        .custom-list li { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+        .modal-info-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 1.25rem; border-radius: 1rem; margin: 1rem 0 1.5rem; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA LATERAL -->
+    <aside class="app-sidebar glass">
+        <div class="sidebar-header">
+            <div class="text-4xl emoji-3d">🛡️</div>
+            <div>
+                <h1 class="sidebar-title">CUSTODIO</h1>
+                <p class="sidebar-subtitle">Diócesis de Sta. Rosa</p>
+            </div>
+        </div>
+
+        <nav class="nav-menu scrollbar-hide">
+            <button onclick="navigate('inicio')" class="glass-btn nav-btn active" data-target="inicio">
+                <span class="icon emoji-3d">🏠</span> Inicio
+            </button>
+            <button onclick="navigate('reportar')" class="glass-btn nav-btn" data-target="reportar">
+                <span class="icon emoji-3d">🛡️</span> Reportar
+            </button>
+            <button onclick="navigate('trazabilidad')" class="glass-btn nav-btn" data-target="trazabilidad">
+                <span class="icon emoji-3d">🔍</span> Mi Reporte
+            </button>
+            <button onclick="navigate('menores')" class="glass-btn nav-btn border-pink" data-target="menores">
+                <span class="icon emoji-3d">🧒</span> Zona Menores <span class="nav-badge" style="background: var(--pink-500); box-shadow: 0 0 10px rgba(236,72,153,0.5);">Nuevo</span>
+            </button>
+            <button onclick="navigate('formacion')" class="glass-btn nav-btn border-green" data-target="formacion">
+                <span class="icon emoji-3d">🎓</span> Formación <span class="nav-badge" style="background: var(--green-500);">Nuevo</span>
+            </button>
+            <button onclick="navigate('dashboard')" class="glass-btn nav-btn" data-target="dashboard">
+                <span class="icon emoji-3d">📊</span> Dashboard
+            </button>
+            <button onclick="navigate('espiritual')" class="glass-btn nav-btn border-purple" data-target="espiritual">
+                <span class="icon emoji-3d">✝️</span> Espiritual <span class="nav-badge" style="background: var(--purple-500);">Nuevo</span>
+            </button>
+            <button onclick="navigate('contacto')" class="glass-btn nav-btn" data-target="contacto">
+                <span class="icon emoji-3d">📞</span> Directorio
+            </button>
+        </nav>
+
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.75rem; color: var(--gray-400);">
+            <p style="font-weight: 600; color: var(--gray-300);">Cultura del Cuidado</p>
+            <p>Versión 2.0 · 2026</p>
+        </div>
+    </aside>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main id="main-content" class="app-main">
+        
+        <!-- Modal global -->
+        <div id="modal-container" class="modal-overlay">
+            <div class="modal-content-wrap">
+                <button onclick="closeModal()" class="modal-close">&times;</button>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+
+        <!-- ================= INICIO ================= -->
+        <section id="inicio" class="view-section">
+            
+            <div class="hero-banner tilt-card glass">
+                <div class="hero-bg">
+                    <img src="https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Manos protegiendo">
+                    <div class="hero-gradient"></div>
+                </div>
+                
+                <div class="hero-content">
+                    <span class="hero-tag">Política de Prevención y Protección</span>
+                    <h2 class="hero-title">¡Cuenta con <br/><span style="color: var(--blue-300);">nosotros!</span></h2>
+                    <p style="font-size: 1.125rem; color: rgba(191, 219, 254, 0.9); max-width: 42rem; line-height: 1.6;">Nuestra Diócesis está comprometida con la creación de entornos seguros. Todo reporte se atiende con seriedad y estricta confidencialidad.</p>
+                </div>
+                
+                <div style="position: relative; z-index: 10; flex-shrink: 0;">
+                    <button onclick="openCrisisModal()" class="btn-crisis">
+                        <span class="emoji-3d" style="font-size: 3.75rem; margin-bottom: 0.75rem; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">🆘</span>
+                        <span style="font-size: 1.5rem; letter-spacing: 0.1em; font-family: var(--font-heading);">EMERGENCIA</span>
+                        <span style="font-size: 0.875rem; opacity: 0.9; margin-top: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.25rem 1rem; border-radius: 9999px;">Necesito ayuda ahora</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <button onclick="navigate('reportar')" class="feature-card glass-card tilt-card border-blue hover-bg-blue">
+                    <div class="card-header">
+                        <h3 class="card-title text-blue-hover">Canal de Reporte</h3>
+                        <span class="card-icon-wrap bg-blue-icon emoji-3d">🛡️</span>
+                    </div>
+                    <p class="card-desc">Plataforma segura y anónima. Con seguimiento en tiempo real de tu caso.</p>
+                </button>
+
+                <button onclick="navigate('menores')" class="feature-card glass-card tilt-card border-pink hover-bg-pink">
+                    <div class="glow-pink"></div>
+                    <div class="card-header">
+                        <h3 class="card-title text-pink-hover">Zona Menores <span style="font-size: 0.75rem; color: var(--pink-400); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">✦ Nuevo módulo</span></h3>
+                        <span class="card-icon-wrap bg-pink-icon emoji-3d">🧒</span>
+                    </div>
+                    <p class="card-desc">Un espacio amigable para pedir ayuda con palabras simples. Te creemos.</p>
+                </button>
+
+                <button onclick="navigate('espiritual')" class="feature-card glass-card tilt-card border-purple hover-bg-purple">
+                    <div class="glow-purple"></div>
+                    <div class="card-header">
+                        <h3 class="card-title text-purple-hover">Espiritual <span style="font-size: 0.75rem; color: var(--purple-400); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">✦ Acompañamiento</span></h3>
+                        <span class="card-icon-wrap bg-purple-icon emoji-3d">🕊️</span>
+                    </div>
+                    <p class="card-desc">Apoyo desde la fe. Oración, consuelo y acompañamiento pastoral.</p>
+                </button>
+                
+                <button onclick="navigate('formacion')" class="feature-card glass-card tilt-card border-green hover-bg-green">
+                    <div class="glow-green"></div>
+                    <div class="card-header">
+                        <h3 class="card-title text-green-hover">Formación <span style="font-size: 0.75rem; color: var(--green-400); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em;">✦ Lecciones</span></h3>
+                        <span class="card-icon-wrap bg-green-icon emoji-3d">🎓</span>
+                    </div>
+                    <p class="card-desc">Microlecciones para padres, catequistas y agentes pastorales.</p>
+                </button>
+
+                <button onclick="navigate('dashboard')" class="feature-card glass-card tilt-card border-blue hover-bg-blue">
+                    <div class="card-header">
+                        <h3 class="card-title text-blue-hover">Dashboard Pastoral</h3>
+                        <span class="card-icon-wrap bg-blue-icon emoji-3d">📊</span>
+                    </div>
+                    <p class="card-desc">Panel de control exclusivo para la gestión segura en parroquias.</p>
+                </button>
+
+                <button onclick="navigate('trazabilidad')" class="feature-card glass-card tilt-card border-blue hover-bg-blue">
+                    <div class="card-header">
+                        <h3 class="card-title text-blue-hover">Trazabilidad</h3>
+                        <span class="card-icon-wrap bg-blue-icon emoji-3d">🔍</span>
+                    </div>
+                    <p class="card-desc">Ingresa tu número de radicado para conocer el estado de tu proceso.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= REPORTAR ================= -->
+        <section id="reportar" class="view-section narrow hidden">
+            <div class="section-header section-header-blue">
+                <div class="bg-blue-icon" style="padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                    <span class="text-4xl emoji-3d block">🛡️</span>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-2" style="font-family: var(--font-heading);">Hacer un reporte</h2>
+                    <p class="text-lg" style="color: var(--blue-200);">Un canal seguro, confidencial y con seguimiento directo.</p>
+                </div>
+            </div>
+
+            <div class="form-container glass">
+                <div style="position: absolute; right: -5rem; top: -5rem; width: 16rem; height: 16rem; background: rgba(59,130,246,0.1); filter: blur(80px); border-radius: 50%; pointer-events: none;"></div>
+                
+                <div class="form-alert">
+                    <p>Este formulario llega directamente a la <strong>Delegación de Protección</strong>. Protegemos tu identidad frente a cualquier tipo de represalia, garantizado por el protocolo (VELM art. 3).</p>
+                </div>
+
+                <div class="toggle-wrap">
+                    <div class="toggle-container">
+                        <input type="checkbox" id="anonimo-toggle" class="toggle-checkbox"/>
+                        <label for="anonimo-toggle" class="toggle-label"></label>
+                    </div>
+                    <label for="anonimo-toggle" style="font-weight: 700; font-size: 1.125rem; cursor: pointer; user-select: none;">Quiero ser anónimo/a</label>
+                </div>
+
+                <form style="position: relative; z-index: 10;" onsubmit="submitReport(event)">
+                    <div id="identidad-fields" class="form-group" style="transition: opacity var(--transition-smooth);">
+                        <label class="form-label">Nombre completo</label>
+                        <input type="text" class="form-input" placeholder="Escribe tu nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tipo de situación</label>
+                        <select class="form-input" style="cursor: pointer;">
+                            <option value="">Selecciona una opción...</option>
+                            <option>Abuso de poder o de conciencia</option>
+                            <option>Comportamiento inapropiado con menores</option>
+                            <option>Acoso u hostigamiento</option>
+                            <option>Otra situación que vulnera la protección</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Descripción detallada de los hechos</label>
+                        <textarea rows="5" class="form-input" placeholder="Describe qué ocurrió, cuándo, dónde y cómo de la manera más detallada posible..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">¿Quién fue la persona afectada?</label>
+                        <input type="text" class="form-input" placeholder="Ej: Yo mismo, un menor de edad, un catequista...">
+                    </div>
+
+                    <div style="padding-top: 1rem;">
+                        <button type="submit" class="btn-primary">
+                            <span>Enviar reporte de forma segura</span>
+                            <svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= TRAZABILIDAD ================= -->
+        <section id="trazabilidad" class="view-section narrow hidden">
+            <div class="section-header section-header-indigo">
+                <div style="background: rgba(99,102,241,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                    <span class="text-4xl emoji-3d block">🔍</span>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-2" style="font-family: var(--font-heading);">Mi reporte</h2>
+                    <p class="text-lg" style="color: var(--indigo-200);">Consulta el estado y avance de tu proceso en tiempo real.</p>
+                </div>
+            </div>
+
+            <div class="glass glass-card mb-8">
+                <div class="track-input-wrap">
+                    <div style="flex-grow: 1; width: 100%;">
+                        <label class="form-label" style="color: var(--indigo-100); margin-bottom: 0.75rem;">Número de seguimiento único</label>
+                        <input type="text" id="track-id" class="form-input track-input" placeholder="DSR-2026-XXXX" value="DSR-2026-0847">
+                    </div>
+                    <button onclick="showTracking()" class="btn-search">Buscar</button>
+                </div>
+            </div>
+
+            <!-- Tracking Result -->
+            <div id="tracking-result" class="glass glass-card hidden" style="padding: 3rem;">
+                <div style="display: flex; flex-direction: column; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; margin-bottom: 2.5rem;">
+                    <div>
+                        <p style="font-size: 0.875rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.5rem;">Referencia de Reporte</p>
+                        <h3 style="font-size: 2.25rem; font-family: monospace; font-weight: 700; color: var(--indigo-300);">DSR-2026-0847</h3>
+                    </div>
+                    <div style="background: rgba(234,179,8,0.1); padding: 1rem; border-radius: 1rem; border: 1px solid rgba(234,179,8,0.2);">
+                        <span style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(234,179,8,0.2); color: var(--yellow-300); border: 1px solid rgba(234,179,8,0.5); padding: 0.375rem 1rem; border-radius: 9999px; font-weight: 700; font-size: 0.875rem;">
+                            <span style="width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--yellow-400);" class="animate-pulse"></span> En valoración
+                        </span>
+                        <p style="font-size: 0.75rem; color: var(--gray-400); margin-top: 0.75rem; font-weight: 500;">Última act: 15 oct 2026 · 10:32 a.m.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-container">
+                    
+                    <!-- Paso 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon icon-green">
+                            <svg style="width: 1.25rem; height: 1.25rem; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; font-size: 1.25rem; color: var(--green-400); margin-bottom: 0.25rem;">Reporte recibido en el sistema</h4>
+                        <p style="font-size: 0.875rem; color: var(--gray-400); font-weight: 500;">14 oct · 8:47 p.m.</p>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon icon-green">
+                            <svg style="width: 1.25rem; height: 1.25rem; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h4 style="font-weight: 700; font-size: 1.25rem; color: var(--green-400); margin-bottom: 0.25rem;">Asignado a la Delegación</h4>
+                        <p style="font-size: 0.875rem; color: var(--gray-400); font-weight: 500;">15 oct · 9:00 a.m.</p>
+                    </div>
+
+                    <!-- Paso 3 (Actual) -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon icon-yellow">
+                            <div style="width: 0.75rem; height: 0.75rem; background: white; border-radius: 50%; position: absolute;" class="animate-ping"></div>
+                            <div style="width: 0.75rem; height: 0.75rem; background: white; border-radius: 50%; position: relative; z-index: 20;"></div>
+                        </div>
+                        <h4 style="font-weight: 700; font-size: 1.5rem; color: var(--yellow-400); margin-bottom: 0.25rem;">En proceso de valoración</h4>
+                        <p style="font-size: 0.875rem; color: var(--gray-300); font-weight: 500; margin-bottom: 0.75rem;">Duración estimada: 48 horas</p>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); font-size: 0.875rem; color: var(--gray-200); line-height: 1.6;">
+                            El equipo interdisciplinario está revisando los detalles proporcionados para determinar los siguientes pasos conforme al Protocolo Diocesano. La información está bajo estricta confidencialidad.
+                        </div>
+                    </div>
+
+                    <!-- Paso 4 -->
+                    <div class="timeline-item" style="opacity: 0.4;">
+                        <div class="timeline-icon icon-gray"></div>
+                        <h4 style="font-weight: 700; font-size: 1.25rem; color: white; margin-bottom: 0.25rem;">Activación de protocolo</h4>
+                        <p style="font-size: 0.875rem; color: var(--gray-400); font-weight: 500;">Pendiente</p>
+                    </div>
+
+                    <!-- Paso 5 -->
+                    <div class="timeline-item" style="opacity: 0.4;">
+                        <div class="timeline-icon icon-gray"></div>
+                        <h4 style="font-weight: 700; font-size: 1.25rem; color: white; margin-bottom: 0.25rem;">Acompañamiento y resolución</h4>
+                        <p style="font-size: 0.875rem; color: var(--gray-400); font-weight: 500;">Pendiente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MENORES ================= -->
+        <section id="menores" class="view-section medium hidden">
+            <div class="menores-banner glass">
+                <img src="https://images.pexels.com/photos/1162607/pexels-photo-1162607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="menores-img mask-image-left" alt="Niño sonriendo seguro">
+
+                <div style="position: relative; z-index: 10;">
+                    <span class="emoji-3d block animate-bounce" style="font-size: 4.5rem; margin-bottom: 1.5rem;">🌟</span>
+                    <h2 style="font-size: 3.75rem; font-weight: 800; font-family: var(--font-heading); line-height: 1.1; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 8px rgba(0,0,0,0.1));">Hola. Estás en un <span style="color: var(--pink-300);">lugar seguro.</span></h2>
+                    <p style="font-size: 1.5rem; color: var(--pink-50); font-weight: 300; line-height: 1.6; margin-bottom: 2.5rem; max-width: 42rem;">
+                        Aquí puedes pedir ayuda sin tener miedo. <strong style="font-weight: 700; background: rgba(236,72,153,0.2); padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Te creemos y te cuidamos.</strong>
+                    </p>
+
+                    <div class="cards-grid">
+                        
+                        <!-- Tarjeta 1: Crisis Menor -->
+                        <button onclick="showPredefinedModal('menoresCrisis')" class="action-card red tilt-card group">
+                            <span class="emoji-3d block mb-4" style="font-size: 3.75rem; transition: transform 0.3s;">😨</span>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem;">Tengo miedo y necesito ayuda ahora mismo</h3>
+                            <span class="pill-btn pill-red">Pedir ayuda inmediata ➔</span>
+                        </button>
+
+                        <!-- Tarjeta 2: Incómodo -->
+                        <button onclick="showPredefinedModal('menoresIncomodo')" class="action-card orange tilt-card group">
+                            <span class="emoji-3d block mb-4" style="font-size: 3.75rem; transition: transform 0.3s;">😟</span>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem;">Alguien me hizo sentir incómodo o me hizo daño</h3>
+                            <span class="pill-btn pill-orange">Hablar con alguien ➔</span>
+                        </button>
+
+                        <!-- Tarjeta 3: Testigo -->
+                        <button onclick="showPredefinedModal('menoresTestigo')" class="action-card yellow tilt-card group">
+                            <span class="emoji-3d block mb-4" style="font-size: 3.75rem; transition: transform 0.3s;">😕</span>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem;">Vi algo que me pareció raro o que no está bien</h3>
+                            <span class="pill-btn pill-yellow">Contar lo que vi ➔</span>
+                        </button>
+
+                        <!-- Tarjeta 4: Aprender -->
+                        <button onclick="showPredefinedModal('menoresAprender')" class="action-card blue tilt-card group">
+                            <span class="emoji-3d block mb-4" style="font-size: 3.75rem; transition: transform 0.3s;">🤔</span>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; line-height: 1.4; margin-bottom: 1rem;">Quiero saber qué cosas están bien y qué no</h3>
+                            <span class="pill-btn pill-blue">Aprender reglas ➔</span>
+                        </button>
+
+                    </div>
+
+                    <div style="margin-top: 3rem; background: rgba(0,0,0,0.5); backdrop-filter: blur(24px); padding: 2rem; border-radius: 2rem; border: 2px solid rgba(236,72,153,0.3); display: flex; align-items: center; gap: 1.5rem; box-shadow: 0 0 30px rgba(236,72,153,0.2);">
+                        <span class="emoji-3d flex-shrink-0" style="font-size: 3rem;">🛡️</span>
+                        <p style="font-size: 1.25rem; font-weight: 500; color: var(--pink-100); line-height: 1.4;">
+                            Recuerda la regla de oro: <span style="color: white; font-weight: 800; font-size: 1.875rem; letter-spacing: 0.05em; display: block; margin-top: 0.25rem;">TU CUERPO ES TUYO.</span> <span style="display: block; margin-top: 0.5rem; font-size: 1.125rem; color: var(--pink-200);">Nadie tiene derecho a tocarte, pedirte fotos o decirte cosas que te incomoden.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FORMACION ================= -->
+        <section id="formacion" class="view-section hidden">
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1.25rem;">
+                        <div style="background: rgba(34,197,94,0.2); padding: 1rem; border-radius: 1.5rem; flex-shrink: 0;">
+                            <span class="text-4xl emoji-3d block">🎓</span>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl font-extrabold mb-2" style="font-family: var(--font-heading);">Formación continua</h2>
+                            <p class="text-lg" style="color: var(--green-200);">Módulos obligatorios para consolidar la cultura del cuidado.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-indicator glass">
+                        <span style="font-size: 0.875rem; color: var(--gray-300); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Progreso</span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+                        <span style="font-weight: 700; color: var(--green-400); font-size: 1.125rem;">1/6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile selector interactivo -->
+            <div class="filter-tabs scrollbar-hide">
+                <button onclick="updateFilters(this)" class="filter-btn active">Todos</button>
+                <button onclick="updateFilters(this)" class="filter-btn">Padres</button>
+                <button onclick="updateFilters(this)" class="filter-btn">Agentes Pastorales</button>
+                <button onclick="updateFilters(this)" class="filter-btn">Párrocos</button>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Módulo 1 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/8383492/pexels-photo-8383492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Estudio">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 1</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">El abuso de conciencia</h3>
+                            <p class="course-desc">Aprende a identificar dinámicas de manipulación espiritual y cómo prevenirlas en comunidades de fe.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 8 min</span>
+                            <button onclick="showPredefinedModal('formacion1')" class="btn-course">
+                                Iniciar <span style="transition: transform var(--transition-smooth);">➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/3354675/pexels-photo-3354675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Niño triste">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 2</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">5 señales en menores</h3>
+                            <p class="course-desc">Identifica cambios de comportamiento, miedos repentinos y señales de alerta en niños y adolescentes.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 6 min</span>
+                            <button onclick="showPredefinedModal('formacion2')" class="btn-course">
+                                Iniciar <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/716281/pexels-photo-716281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Charla seria">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 3</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">Ante una revelación</h3>
+                            <p class="course-desc">Qué decir, qué no decir y cómo actuar en los primeros minutos cuando alguien te cuenta sobre un abuso.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 10 min</span>
+                            <button onclick="showPredefinedModal('formacion3')" class="btn-course">
+                                Iniciar <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 4 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Comunidad">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 4</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">Acuerdos de Buen Trato</h3>
+                            <p class="course-desc">Cómo establecer normas claras, visibles y seguras (como la regla de dos) para catequesis y grupos juveniles.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 7 min</span>
+                            <button onclick="showPredefinedModal('formacion4')" class="btn-course">
+                                Iniciar <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 5 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/5053846/pexels-photo-5053846.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Celular redes">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 5</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">Prevención en Redes</h3>
+                            <p class="course-desc">Límites claros para el uso de WhatsApp, redes sociales y fotografías con menores de edad en entornos pastorales.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 5 min</span>
+                            <button onclick="showPredefinedModal('formacion5')" class="btn-course">
+                                Iniciar <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 6 -->
+                <div class="course-card tilt-card">
+                    <div class="course-img-wrap">
+                        <img src="https://images.pexels.com/photos/1618606/pexels-photo-1618606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Liderazgo cruz">
+                        <div class="course-gradient"></div>
+                        <span class="course-tag">Módulo 6</span>
+                    </div>
+                    <div class="course-body">
+                        <div>
+                            <h3 class="course-title">Evitar el abuso de poder</h3>
+                            <p class="course-desc">Entiende el liderazgo como servicio. Fomenta la transparencia, evita el autoritarismo y promueve la participación comunitaria.</p>
+                        </div>
+                        <div class="course-footer">
+                            <span class="course-time">⏱️ 9 min</span>
+                            <button onclick="showPredefinedModal('formacion6')" class="btn-course">
+                                Iniciar <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= DASHBOARD ================= -->
+        <section id="dashboard" class="view-section hidden">
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1.25rem;">
+                        <div style="background: rgba(59,130,246,0.2); padding: 1rem; border-radius: 1.5rem; flex-shrink: 0;">
+                            <span class="text-4xl emoji-3d block">📊</span>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl font-extrabold mb-2" style="font-family: var(--font-heading);">Dashboard Pastoral</h2>
+                            <p class="text-lg" style="color: var(--blue-200); font-weight: 500;">Parroquia Ntra. Sra. del Rosario</p>
+                        </div>
+                    </div>
+                    <div class="glass" style="background: rgba(127,29,29,0.4); border: 1px solid rgba(239,68,68,0.5); padding: 1rem 1.5rem; border-radius: 1rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 0 20px rgba(220,38,38,0.3);">
+                        <span style="font-size: 1.875rem;" class="animate-pulse">⚠️</span>
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--red-200); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">1 reporte activo</p>
+                            <p style="font-size: 0.75rem; color: var(--red-100); font-family: monospace; margin-top: 0.25rem;">Ref: DSR-2026-0847 · En valoración</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+                <!-- Main Stats -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+                    <div class="stat-card tilt-card">
+                        <div class="stat-bg-icon">🤝</div>
+                        <span class="emoji-3d block mb-4" style="font-size: 2.25rem;">🤝</span>
+                        <div class="stat-value">24</div>
+                        <p style="color: var(--blue-200); font-weight: 500;">Agentes con código firmado</p>
+                    </div>
+                    <div class="stat-card tilt-card">
+                        <div class="stat-bg-icon">📚</div>
+                        <span class="emoji-3d block mb-4" style="font-size: 2.25rem;">📚</span>
+                        <div class="stat-value">3</div>
+                        <p style="color: var(--green-200); font-weight: 500;">Formaciones completadas promedio</p>
+                    </div>
+                    <div class="stat-card tilt-card" style="border-color: rgba(249,115,22,0.4); background: rgba(124,45,18,0.1);">
+                        <div class="stat-bg-icon">🛡️</div>
+                        <span class="emoji-3d block mb-4" style="font-size: 2.25rem;">🛡️</span>
+                        <div class="stat-value" style="color: var(--orange-400);">1</div>
+                        <p style="color: var(--orange-200); font-weight: 500;">Reporte activo en la jurisdicción</p>
+                    </div>
+                    <div class="stat-card tilt-card">
+                        <div class="stat-bg-icon">📝</div>
+                        <span class="emoji-3d block mb-4" style="font-size: 2.25rem;">📝</span>
+                        <div class="stat-value">8</div>
+                        <p style="color: var(--purple-200); font-weight: 500;">Grupos con Acuerdos vigentes</p>
+                    </div>
+                </div>
+
+                <!-- Next Key Dates -->
+                <div class="glass" style="padding: 2rem; border-radius: 2rem; background: rgba(15,23,42,0.6);">
+                    <h3 style="font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 0.5rem; font-size: 1.5rem;">🗓️</span> Fechas Clave
+                    </h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="background: rgba(127,29,29,0.3); border-left: 4px solid var(--red-500); padding: 1.25rem; border-radius: 0 1rem 1rem 0; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem;">
+                                <h4 style="font-weight: 700; color: var(--red-100); font-size: 0.875rem;">Renovación código conducta</h4>
+                                <span style="background: var(--red-500); font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 0.25rem; text-transform: uppercase; color: white; font-weight: 900; letter-spacing: 0.05em;">Urgente</span>
+                            </div>
+                            <p style="font-size: 0.75rem; color: rgba(252,165,165,0.8); margin-top: 0.5rem; font-weight: 500;">5 agentes · Vence: 30 nov</p>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); border-left: 4px solid var(--blue-500); padding: 1.25rem; border-radius: 0 1rem 1rem 0;">
+                            <h4 style="font-weight: 700; color: var(--blue-100); font-size: 0.875rem;">Módulo Formación Mensual</h4>
+                            <p style="font-size: 0.75rem; color: rgba(147,197,253,0.8); margin-top: 0.5rem; font-weight: 500;">Tema Noviembre · Disponible</p>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); border-left: 4px solid var(--green-500); padding: 1.25rem; border-radius: 0 1rem 1rem 0;">
+                            <h4 style="font-weight: 700; color: var(--green-100); font-size: 0.875rem;">Acuerdos Buen Trato</h4>
+                            <p style="font-size: 0.75rem; color: rgba(134,239,172,0.8); margin-top: 0.5rem; font-weight: 500;">Límite para grupos · 15 nov</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <img src="https://images.pexels.com/photos/5409653/pexels-photo-5409653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width: 100%; height: 10rem; object-fit: cover; border-radius: 2rem; opacity: 0.4; box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.1); mix-blend-mode: overlay;" alt="Dashboard decorativo">
+        </section>
+
+        <!-- ================= ESPIRITUAL ================= -->
+        <section id="espiritual" class="view-section medium hidden">
+            
+            <div class="spiritual-banner">
+                <img src="https://images.pexels.com/photos/1618606/pexels-photo-1618606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; mix-blend-mode: screen; pointer-events: none;" alt="Iglesia">
+                <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--slate-900), transparent, transparent);"></div>
+
+                <div style="position: relative; z-index: 10; max-width: 48rem; margin: 0 auto;">
+                    <span class="emoji-3d block" style="font-size: 4.5rem; margin-bottom: 2rem; filter: drop-shadow(0 0 25px rgba(255,255,255,0.6));">🕊️</span>
+                    <h2 style="font-size: 3.75rem; font-family: var(--font-heading); font-weight: 800; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 8px rgba(0,0,0,0.1));">No estás solo <span style="color: var(--purple-300);">ante Dios</span></h2>
+                    <p style="font-size: 1.5rem; color: var(--purple-100); margin-bottom: 3rem; font-weight: 300; font-style: italic; line-height: 1.6;">La Iglesia te acompaña desde la fe. Más que una respuesta institucional, buscamos brindarte un abrazo pastoral real.</p>
+                    
+                    <div class="quote-box tilt-card">
+                        <div style="position: absolute; top: 0; right: 0; padding: 1rem; opacity: 0.1; font-size: 6rem;">✨</div>
+                        <h3 style="color: var(--yellow-400); font-family: var(--font-heading); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; position: relative; z-index: 10;">
+                            <span style="background: rgba(234,179,8,0.2); padding: 0.5rem; border-radius: 0.5rem; font-size: 1.25rem;">✨</span> Oración al Ángel Custodio
+                        </h3>
+                        <p style="font-size: 1.875rem; font-family: serif; color: white; line-height: 1.6; position: relative; z-index: 10;">
+                            "Ángel de Dios, que eres mi custodio, ilumina, guarda y rige a quien la piedad divina me ha encomendado. <strong style="color: var(--yellow-300); border-bottom: 2px solid rgba(234,179,8,0.5); padding-bottom: 0.25rem;">Cuida de los vulnerables.</strong> Amén."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 2.5rem; opacity: 0.8;">
+                <div style="height: 1px; background: linear-gradient(to right, transparent, var(--purple-500), transparent); width: 100%; max-width: 200px;"></div>
+                <h3 style="text-align: center; font-family: var(--font-heading); font-weight: 700; color: var(--purple-300); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; flex-shrink: 0;">Reflexiones Bíblicas</h3>
+                <div style="height: 1px; background: linear-gradient(to right, transparent, var(--purple-500), transparent); width: 100%; max-width: 200px;"></div>
+            </div>
+
+            <div class="cards-grid" style="margin-bottom: 3rem;">
+                <div class="glass glass-card tilt-card" style="background: rgba(0,0,0,0.2); border-top: 4px solid var(--purple-500);">
+                    <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: var(--purple-400); margin-bottom: 0.75rem; display: block; background: rgba(168,85,247,0.1); width: max-content; padding: 0.25rem 0.75rem; border-radius: 0.375rem;">SALMO 91 · 11</span>
+                    <h4 style="font-size: 1.25rem; font-family: var(--font-heading); font-weight: 700; margin-bottom: 1rem; transition: color 0.3s;">El Señor mandará sus ángeles</h4>
+                    <p style="color: var(--gray-300); font-family: serif; font-style: italic; font-size: 1.125rem; line-height: 1.6;">«Pues a sus ángeles mandará que te guarden en todos tus caminos.»</p>
+                </div>
+
+                <div class="glass glass-card tilt-card" style="background: rgba(0,0,0,0.2); border-top: 4px solid var(--blue-500);">
+                    <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: var(--blue-400); margin-bottom: 0.75rem; display: block; background: rgba(59,130,246,0.1); width: max-content; padding: 0.25rem 0.75rem; border-radius: 0.375rem;">MATEO 18 · 10</span>
+                    <h4 style="font-size: 1.25rem; font-family: var(--font-heading); font-weight: 700; margin-bottom: 1rem; transition: color 0.3s;">El ángel de los pequeños</h4>
+                    <p style="color: var(--gray-300); font-family: serif; font-style: italic; font-size: 1.125rem; line-height: 1.6;">«Mirad que no despreciéis a uno de estos pequeños.»</p>
+                </div>
+
+                <div class="glass glass-card tilt-card" style="background: rgba(0,0,0,0.2); border-top: 4px solid var(--pink-500);">
+                    <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: var(--pink-400); margin-bottom: 0.75rem; display: block; background: rgba(236,72,153,0.1); width: max-content; padding: 0.25rem 0.75rem; border-radius: 0.375rem;">LUCAS 10 · 33</span>
+                    <h4 style="font-size: 1.25rem; font-family: var(--font-heading); font-weight: 700; margin-bottom: 1rem; transition: color 0.3s;">El Buen Samaritano</h4>
+                    <p style="color: var(--gray-300); font-family: serif; font-style: italic; font-size: 1.125rem; line-height: 1.6;">«Al verle, se compadeció, se acercó y vendó sus heridas.»</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; padding-bottom: 2rem;">
+                <button onclick="navigate('contacto')" style="background: linear-gradient(to right, var(--purple-700), var(--indigo-600)); color: white; font-weight: 800; padding: 1.25rem 2.5rem; border-radius: 1rem; box-shadow: 0 0 20px rgba(147,51,234,0.4); transition: transform 0.3s; display: flex; align-items: center; gap: 0.75rem; font-size: 1.125rem;">
+                    Contactar Línea de Apoyo Espiritual ➔
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= CONTACTO ================= -->
+        <section id="contacto" class="view-section medium hidden">
+            <div style="text-align: center; margin-bottom: 3rem; margin-top: 1rem;">
+                <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 1.25rem; border-radius: 50%; margin-bottom: 1.5rem; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="emoji-3d block" style="font-size: 3.75rem;">🤝</span>
+                </div>
+                <h2 style="font-size: 3.75rem; font-family: var(--font-heading); font-weight: 800; margin-bottom: 1.5rem;">Directorio de <span style="color: var(--blue-300);">Ayuda</span></h2>
+                <p style="font-size: 1.5rem; color: var(--blue-100); font-weight: 300; margin-bottom: 1rem;">Encuentra el contacto adecuado para cada necesidad.</p>
+                <p style="color: var(--gray-400); font-size: 0.875rem; max-width: 42rem; margin: 0 auto; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05); line-height: 1.6;">El <strong>Consejo Diocesano para la Cultura del Cuidado</strong> coordina todos estos organismos y garantiza la coherencia y efectividad de la respuesta institucional.</p>
+            </div>
+
+            <!-- Emergencias -->
+            <div style="margin-bottom: 2.5rem;">
+                <h3 style="font-size: 1.5rem; font-family: var(--font-heading); font-weight: 800; color: var(--red-400); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="background: rgba(239,68,68,0.2); padding: 0.5rem; border-radius: 0.75rem; font-size: 1.5rem;">🚨</span> Líneas de Emergencia Nacional
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    
+                    <div class="glass contact-card row tilt-card" style="border-color: rgba(239,68,68,0.5); background: linear-gradient(to right, rgba(127,29,29,0.3), rgba(0,0,0,0.2)); box-shadow: 0 0 20px rgba(220,38,38,0.15);">
+                        <div style="display: flex; align-items: center; gap: 1.25rem;">
+                            <div style="background: rgba(239,68,68,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 2.25rem;">⚖️</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.25rem;">ICBF — Línea 141</h3>
+                                <p style="font-size: 0.875rem; color: var(--red-200); font-weight: 500; background: rgba(127,29,29,0.5); display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(239,68,68,0.3); margin-top: 0.25rem;">Línea gratuita nacional · 24 horas</p>
+                            </div>
+                        </div>
+                        <a href="tel:141" class="contact-btn row-btn" style="background: var(--red-600); box-shadow: 0 0 15px rgba(220,38,38,0.4);">
+                            <span>📞 Llamar al 141</span>
+                        </a>
+                    </div>
+
+                    <div class="glass contact-card row tilt-card" style="border-color: rgba(239,68,68,0.5); background: linear-gradient(to right, rgba(127,29,29,0.3), rgba(0,0,0,0.2)); box-shadow: 0 0 20px rgba(220,38,38,0.15);">
+                        <div style="display: flex; align-items: center; gap: 1.25rem;">
+                            <div style="background: rgba(239,68,68,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 2.25rem;">🚔</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.25rem;">Fiscalía — Línea 122</h3>
+                                <p style="font-size: 0.875rem; color: var(--red-200); font-weight: 500; background: rgba(127,29,29,0.5); display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(239,68,68,0.3); margin-top: 0.25rem;">Denuncia obligatoria · 24 horas</p>
+                            </div>
+                        </div>
+                        <a href="tel:122" class="contact-btn row-btn" style="background: var(--red-800); box-shadow: 0 0 15px rgba(153,27,27,0.4);">
+                            <span>📞 Llamar al 122</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diocesanos -->
+            <div>
+                <h3 style="font-size: 1.5rem; font-family: var(--font-heading); font-weight: 800; color: var(--blue-400); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem;">
+                    <span style="background: rgba(59,130,246,0.2); padding: 0.5rem; border-radius: 0.75rem; font-size: 1.5rem;">🏛️</span> Organismos Diocesanos
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    
+                    <div class="glass contact-card tilt-card" style="border-color: rgba(59,130,246,0.3); background: rgba(0,0,0,0.2);">
+                        <div style="position: absolute; right: -2rem; top: -2rem; background: rgba(59,130,246,0.1); width: 8rem; height: 8rem; border-radius: 50%; filter: blur(24px);"></div>
+                        <div style="display: flex; align-items: flex-start; gap: 1.25rem; position: relative; z-index: 10;">
+                            <div style="background: rgba(59,130,246,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 1.875rem;">🛡️</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Delegación de Protección</h3>
+                                <p style="font-size: 0.875rem; color: var(--gray-300); margin-bottom: 1rem; line-height: 1.6;">Atención de reportes formales y activación de protocolos diocesanos.</p>
+                                <p style="font-size: 0.875rem; color: var(--blue-300); font-weight: 700; font-family: monospace;">proteccionmenores@dsro.org</p>
+                            </div>
+                        </div>
+                        <a href="mailto:proteccionmenores@dsro.org" class="contact-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 10;">✉️ Enviar Correo</a>
+                    </div>
+
+                    <div class="glass contact-card tilt-card" style="border-color: rgba(34,197,94,0.3); background: rgba(0,0,0,0.2);">
+                        <div style="position: absolute; right: -2rem; top: -2rem; background: rgba(34,197,94,0.1); width: 8rem; height: 8rem; border-radius: 50%; filter: blur(24px);"></div>
+                        <div style="display: flex; align-items: flex-start; gap: 1.25rem; position: relative; z-index: 10;">
+                            <div style="background: rgba(34,197,94,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 1.875rem;">🕊️</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Oficina del Buen Trato</h3>
+                                <p style="font-size: 0.875rem; color: var(--gray-300); margin-bottom: 1rem; line-height: 1.6;">Prevención, promoción de ambientes seguros y resolución de conflictos.</p>
+                                <p style="font-size: 0.875rem; color: var(--green-300); font-weight: 700; font-family: monospace;">buentrato@dsro.org</p>
+                            </div>
+                        </div>
+                        <a href="mailto:buentrato@dsro.org" class="contact-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 10;">✉️ Enviar Correo</a>
+                    </div>
+
+                    <div class="glass contact-card tilt-card" style="border-color: rgba(168,85,247,0.3); background: rgba(0,0,0,0.2);">
+                        <div style="position: absolute; right: -2rem; top: -2rem; background: rgba(168,85,247,0.1); width: 8rem; height: 8rem; border-radius: 50%; filter: blur(24px);"></div>
+                        <div style="display: flex; align-items: flex-start; gap: 1.25rem; position: relative; z-index: 10;">
+                            <div style="background: rgba(168,85,247,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 1.875rem;">🧠</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Línea Psicosocial</h3>
+                                <p style="font-size: 0.875rem; color: var(--gray-300); margin-bottom: 1rem; line-height: 1.6;">Apoyo emocional profesional y contención psicológica confidencial.</p>
+                                <p style="font-size: 0.875rem; color: var(--purple-300); font-weight: 700; font-family: monospace;">Disponible 8am - 6pm</p>
+                            </div>
+                        </div>
+                        <a href="tel:018000123456" class="contact-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 10;">📞 Llamar Ahora</a>
+                    </div>
+
+                    <div class="glass contact-card tilt-card" style="border-color: rgba(234,179,8,0.3); background: rgba(0,0,0,0.2);">
+                        <div style="position: absolute; right: -2rem; top: -2rem; background: rgba(234,179,8,0.1); width: 8rem; height: 8rem; border-radius: 50%; filter: blur(24px);"></div>
+                        <div style="display: flex; align-items: flex-start; gap: 1.25rem; position: relative; z-index: 10;">
+                            <div style="background: rgba(234,179,8,0.2); padding: 1rem; border-radius: 1rem; flex-shrink: 0;">
+                                <span class="emoji-3d block" style="font-size: 1.875rem;">✝️</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Línea Espiritual</h3>
+                                <p style="font-size: 0.875rem; color: var(--gray-300); margin-bottom: 1rem; line-height: 1.6;">Acompañamiento pastoral, consuelo y dirección espiritual segura.</p>
+                                <p style="font-size: 0.875rem; color: var(--yellow-300); font-weight: 700; font-family: monospace;">Asistencia prioritaria</p>
+                            </div>
+                        </div>
+                        <a href="tel:018000654321" class="contact-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 10;">📞 Llamar Ahora</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; margin-bottom: 2rem; text-align: center; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06);">
+                <p style="color: var(--gray-300); font-family: serif; font-style: italic; font-size: 1.5rem; font-weight: 300;">
+                    «No dejar solos a los que sufren es la primera forma de cuidar.»
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Sistema de navegación
+        function navigate(viewId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.target === viewId) {
+                    btn.classList.add('active');
+                }
+            });
+
+            const mainContainer = document.getElementById('main-content');
+            if(mainContainer) mainContainer.scrollTop = 0;
+
+            document.querySelectorAll('.view-section').forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('fade-in-up');
+            });
+
+            const targetSection = document.getElementById(viewId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                void targetSection.offsetWidth; // Reflow
+                targetSection.classList.add('fade-in-up');
+            }
+        }
+
+        // Inicialización de efectos 3D
+        function initTiltCards() {
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -5; 
+                    const rotateY = ((x - centerX) / centerX) * 5;
+                    
+                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        // Lógica del Toggle de anonimato
+        const anonimoToggle = document.getElementById('anonimo-toggle');
+        const identidadFields = document.getElementById('identidad-fields');
+        if (anonimoToggle && identidadFields) {
+            anonimoToggle.addEventListener('change', function() {
+                if(this.checked) {
+                    identidadFields.style.opacity = '0.3';
+                    identidadFields.style.pointerEvents = 'none';
+                    identidadFields.querySelector('input').value = 'Anónimo';
+                } else {
+                    identidadFields.style.opacity = '1';
+                    identidadFields.style.pointerEvents = 'auto';
+                    identidadFields.querySelector('input').value = '';
+                }
+            });
+        }
+
+        // Sistema Modal Global
+        const modalContainer = document.getElementById('modal-container');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(htmlContent) {
+            modalContent.innerHTML = htmlContent;
+            modalContainer.classList.add('show');
+        }
+
+        function closeModal() {
+            modalContainer.classList.remove('show');
+        }
+
+        function showSimpleMessage(msg) {
+            openModal(`<div class="text-center">${msg}</div>`);
+        }
+
+        const predefinedModals = {
+            menoresCrisis: `
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🚨</span>
+                <strong style="font-size: 1.5rem; color: var(--red-400); display: block; margin-bottom: 1rem;">Estamos contigo</strong>
+                <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">Te vamos a conectar con alguien que te ayudará de inmediato. No estás solo/a.</p>
+                <a href="tel:141" class="modal-btn bg-red-600 hover-bg-red-500">Llamar gratis al 141 ahora</a>
+            `,
+            menoresIncomodo: `
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🛡️</span>
+                <strong style="font-size: 1.5rem; color: var(--orange-400); display: block; margin-bottom: 1rem;">Está bien contarlo</strong>
+                <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">Un adulto de nuestra entera confianza te escuchará para protegerte. Nadie te va a regañar por hablar.</p>
+                <button onclick="closeModal(); navigate('reportar')" class="modal-btn bg-orange-600 hover-bg-orange-500">Quiero contarlo de forma segura</button>
+            `,
+            menoresTestigo: `
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🦸</span>
+                <strong style="font-size: 1.5rem; color: var(--yellow-400); display: block; margin-bottom: 1rem;">Gracias por ser valiente</strong>
+                <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">Nos ayuda mucho que nos cuentes. Vamos a revisar qué está pasando para cuidar a todos tus amigos y compañeros.</p>
+                <button onclick="closeModal(); navigate('reportar')" class="modal-btn bg-yellow-600 hover-bg-yellow-500">Escribir lo que vi</button>
+            `,
+            menoresAprender: `
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">💡</span>
+                <strong style="font-size: 1.5rem; color: var(--blue-400); display: block; margin-bottom: 1rem;">El conocimiento te protege</strong>
+                <div class="modal-info-box">
+                    <ul class="custom-list">
+                        <li><span style="font-size: 1.5rem;">1️⃣</span> <div><b>Tu cuerpo es tuyo.</b> Nadie puede tocarte si no quieres.</div></li>
+                        <li><span style="font-size: 1.5rem;">2️⃣</span> <div><b>Los secretos malos no se guardan.</b> Si un secreto te hace sentir mal, cuéntalo.</div></li>
+                        <li><span style="font-size: 1.5rem;">3️⃣</span> <div><b>Siempre hay alguien.</b> Tus papás, maestros o nosotros estamos para escucharte.</div></li>
+                    </ul>
+                </div>
+                <button onclick="closeModal()" class="modal-btn bg-blue-600 hover-bg-blue-500">¡Entendido!</button>
+            `,
+            formacion1: generateFormacionModal(
+                '📘', 'El abuso de conciencia', 'Módulo 1 · Lección obligatoria',
+                `<p>El <strong>abuso de conciencia</strong> ocurre cuando un líder o figura de autoridad utiliza su posición para manipular, controlar o anular la voluntad de otra persona, apelando a la fe o a la obediencia debida.</p>
+                 <div class="modal-info-box">
+                    <h5 style="font-weight: 700; color: white; margin-bottom: 1rem; font-size: 1.25rem;"><span class="text-red-400">⚠️</span> Señales de alerta</h5>
+                    <ul class="custom-list">
+                        <li><span class="text-green-400">✔</span> <span>Exigencia de obediencia ciega sin cuestionamientos.</span></li>
+                        <li><span class="text-green-400">✔</span> <span>Uso de la culpa o miedo al castigo divino para forzar decisiones.</span></li>
+                        <li><span class="text-green-400">✔</span> <span>Intromisión indebida en la vida personal o decisiones de fuero interno.</span></li>
+                    </ul>
+                 </div>
+                 <p>Es deber proteger no solo el cuerpo, sino la integridad espiritual y psicológica de todos los fieles. Si observas estas dinámicas, repórtalo a la Oficina del Buen Trato.</p>`,
+                 'formacion1'
+            ),
+            formacion2: generateFormacionModal(
+                '👀', '5 señales en menores', 'Módulo 2 · Prevención y Detección',
+                `<p>Los menores rara vez revelan un abuso con palabras directas en primera instancia. A menudo, su comportamiento es el que pide ayuda a gritos.</p>
+                 <div class="modal-info-box">
+                    <ul class="custom-list">
+                        <li><span style="font-size: 1.25rem;">1️⃣</span> <div><strong>Cambios bruscos de humor:</strong> Tristeza, agresividad repentina o aislamiento.</div></li>
+                        <li><span style="font-size: 1.25rem;">2️⃣</span> <div><strong>Rechazo inexplicable:</strong> Miedo desproporcionado a quedarse a solas con alguien.</div></li>
+                        <li><span style="font-size: 1.25rem;">3️⃣</span> <div><strong>Retrocesos en el desarrollo:</strong> Volver a orinarse en la cama, chuparse el dedo.</div></li>
+                        <li><span style="font-size: 1.25rem;">4️⃣</span> <div><strong>Conocimiento sexual inapropiado:</strong> Comportamientos o vocabulario no acorde a su edad.</div></li>
+                        <li><span style="font-size: 1.25rem;">5️⃣</span> <div><strong>Señales físicas:</strong> Dolores recurrentes sin causa médica, autolesiones.</div></li>
+                    </ul>
+                 </div>`,
+                 'formacion2'
+            ),
+            formacion3: generateFormacionModal(
+                '👂', 'Ante una revelación', 'Módulo 3 · Actuación inmediata',
+                `<p>El momento en que alguien te revela un abuso es crítico. Tu reacción puede facilitar su sanación o revictimizarlo profundamente.</p>
+                 <div class="modal-info-box">
+                    <h5 style="font-weight: 700; color: var(--green-400); margin-bottom: 1rem; font-size: 1.25rem;">Qué SÍ debes hacer:</h5>
+                    <ul class="custom-list" style="margin-bottom: 1.5rem;">
+                        <li><span class="text-green-400">✔</span> <span><strong>Créele de inmediato.</strong> Escucha activamente, sin juzgar.</span></li>
+                        <li><span class="text-green-400">✔</span> <span><strong>Mantén la calma.</strong> No muestres horror o shock extremo.</span></li>
+                        <li><span class="text-green-400">✔</span> <span><strong>Valida su valentía.</strong> Dile "Siento mucho que esto te haya pasado".</span></li>
+                    </ul>
+                    <h5 style="font-weight: 700; color: var(--red-400); margin-bottom: 1rem; font-size: 1.25rem;">Qué NO debes hacer:</h5>
+                    <ul class="custom-list">
+                        <li><span class="text-red-400">✘</span> <span><strong>No prometas guardar el secreto.</strong></span></li>
+                        <li><span class="text-red-400">✘</span> <span><strong>No lo interrogues.</strong> Deja eso a los profesionales.</span></li>
+                        <li><span class="text-red-400">✘</span> <span><strong>No confrontes al agresor.</strong> Pone en riesgo a la víctima.</span></li>
+                    </ul>
+                 </div>`,
+                 'formacion3'
+            ),
+            formacion4: generateFormacionModal(
+                '🤝', 'Acuerdos de Buen Trato', 'Módulo 4 · Ambientes seguros',
+                `<p>Los ambientes seguros se construyen a través de normas claras y visibles conocidas por todos.</p>
+                 <div class="modal-info-box">
+                    <h5 style="font-weight: 700; color: white; margin-bottom: 1rem; font-size: 1.25rem;">Normas obligatorias:</h5>
+                    <ul class="custom-list">
+                        <li><span style="font-size: 1.25rem;">🛡️</span> <div><strong>La Regla de Dos:</strong> Mínimo dos adultos responsables presentes.</div></li>
+                        <li><span style="font-size: 1.25rem;">🚪</span> <div><strong>Espacios transparentes:</strong> Reuniones en lugares con puertas abiertas o visibles.</div></li>
+                        <li><span style="font-size: 1.25rem;">🚫</span> <div><strong>Cero favoritismos:</strong> Prohibido dar regalos costosos a escondidas.</div></li>
+                    </ul>
+                 </div>`,
+                 'formacion4'
+            ),
+            formacion5: generateFormacionModal(
+                '📱', 'Prevención en Redes', 'Módulo 5 · Entornos digitales',
+                `<p>El cuidado debe extenderse al mundo virtual con los mismos principios de transparencia.</p>
+                 <div class="modal-info-box">
+                    <h5 style="font-weight: 700; color: white; margin-bottom: 1rem; font-size: 1.25rem;">Protocolos digitales:</h5>
+                    <ul class="custom-list">
+                        <li><span style="font-size: 1.25rem;">💬</span> <div><strong>No a los chats privados 1 a 1:</strong> La comunicación debe ser grupal.</div></li>
+                        <li><span style="font-size: 1.25rem;">👥</span> <div><strong>Regla de dos administradores:</strong> Grupos de WhatsApp con mínimo dos adultos.</div></li>
+                        <li><span style="font-size: 1.25rem;">📸</span> <div><strong>Derechos de imagen:</strong> Prohibido publicar fotos sin consentimiento firmado.</div></li>
+                    </ul>
+                 </div>`,
+                 'formacion5'
+            ),
+            formacion6: generateFormacionModal(
+                '✝️', 'Evitar el abuso de poder', 'Módulo 6 · Liderazgo como servicio',
+                `<p>El clericalismo y el autoritarismo son terrenos fértiles para los abusos. Un buen líder es un facilitador.</p>
+                 <div class="modal-info-box">
+                    <h5 style="font-weight: 700; color: white; margin-bottom: 1rem; font-size: 1.25rem;">Características del Liderazgo Sano:</h5>
+                    <ul class="custom-list">
+                        <li><span style="font-size: 1.25rem;">⚖️</span> <div><strong>Transparencia radical:</strong> Especialmente en el manejo financiero.</div></li>
+                        <li><span style="font-size: 1.25rem;">🔄</span> <div><strong>Rotación de cargos:</strong> La alternancia previene estructuras de control.</div></li>
+                        <li><span style="font-size: 1.25rem;">👂</span> <div><strong>Apertura a la corrección:</strong> Permitir opiniones contrarias sin represalias.</div></li>
+                    </ul>
+                 </div>`,
+                 'formacion6'
+            )
+        };
+
+        function generateFormacionModal(emoji, title, subtitle, content, id) {
+            return `
+                <div style="text-align: left; max-height: 75vh; overflow-y: auto; padding-right: 1rem;">
+                    <div style="background: rgba(34,197,94,0.2); padding: 1rem; border-radius: 50%; width: max-content; margin-bottom: 1rem;"><span style="font-size: 2.25rem; display: block;">${emoji}</span></div>
+                    <h4 style="font-weight: 700; font-size: 1.875rem; margin-bottom: 0.5rem; color: white;">${title}</h4>
+                    <p style="margin-bottom: 1.5rem; color: var(--green-300); font-weight: 600; font-size: 1.125rem;">${subtitle}</p>
+                    
+                    <div style="color: var(--gray-200); line-height: 1.6; font-size: 1.125rem;">
+                        ${content}
+                    </div>
+                    
+                    <button onclick="closeModal(); setTimeout(() => showSimpleMessage('<div style=\\'padding: 1.5rem; text-align: center;\\'><span class=\\'emoji-3d\\' style=\\'font-size: 4.5rem; display: block; margin-bottom: 1.5rem;\\'>🎓</span><h3 style=\\'font-size: 1.875rem; font-weight: 700; color: var(--green-400);\\'>Módulo Completado</h3><p style=\\'color: var(--gray-200); margin-top: 1rem; font-size: 1.125rem;\\'>¡Excelente trabajo! Tu progreso ha sido guardado.</p></div>'), 300)" class="modal-btn bg-green-600 hover-bg-green-500" style="margin-top: 2.5rem;">
+                        Marcar como lección aprendida <span>✓</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function showPredefinedModal(key) {
+            showSimpleMessage(predefinedModals[key]);
+        }
+
+        function updateFilters(btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function openCrisisModal() {
+            openModal(`
+                <div style="text-align: center; padding: 0.5rem;">
+                    <span class="emoji-3d animate-pulse" style="font-size: 4.5rem; display: block; margin-bottom: 1.5rem;">🆘</span>
+                    <h3 style="font-size: 2.25rem; font-family: var(--font-heading); font-weight: 800; color: var(--red-500); margin-bottom: 1rem;">Estamos contigo</h3>
+                    <p style="color: var(--gray-200); margin-bottom: 2rem; font-size: 1.125rem;">Si estás en peligro, usa estos botones para contactar a las autoridades <b>ahora mismo</b>.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                        <a href="tel:+573000000000" class="modal-btn bg-blue-600 hover-bg-blue-500"><span style="font-size: 1.5rem;">📞</span> Delegación Diocesana</a>
+                        <a href="tel:141" class="modal-btn bg-red-600 hover-bg-red-500"><span style="font-size: 1.5rem;">🚨</span> ICBF — Línea 141</a>
+                        <a href="tel:122" class="modal-btn" style="background: var(--red-800);"><span style="font-size: 1.5rem;">🚔</span> Fiscalía — Línea 122</a>
+                    </div>
+
+                    <div style="background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3); padding: 1.25rem; border-radius: 1rem;">
+                        <p style="color: var(--yellow-200); font-size: 0.875rem; line-height: 1.6;">
+                            <strong style="display: block; margin-bottom: 0.5rem; font-size: 1rem; color: var(--yellow-400);">¿No puedes hablar?</strong>
+                            Envía un mensaje de texto al <b style="background: rgba(234,179,8,0.2); padding: 0.125rem 0.5rem; border-radius: 0.25rem; color: white; font-size: 1.125rem;">85432</b> con tu ubicación.
+                        </p>
+                    </div>
+                </div>
+            `);
+        }
+
+        // Simulación de envío de reporte
+        function submitReport(e) {
+            e.preventDefault();
+            const anonimoToggle = document.getElementById('anonimo-toggle');
+            const isAnon = anonimoToggle ? anonimoToggle.checked : false;
+            const refNumber = 'DSR-2026-' + Math.floor(1000 + Math.random() * 9000);
+            
+            openModal(`
+                <div style="text-align: center; padding: 1rem;">
+                    <span class="emoji-3d" style="font-size: 4.5rem; display: block; margin-bottom: 1.5rem;">✅</span>
+                    <h3 style="font-size: 1.875rem; font-family: var(--font-heading); font-weight: 800; color: var(--green-400); margin-bottom: 1rem;">Reporte Enviado</h3>
+                    <p style="color: var(--gray-200); margin-bottom: 1.5rem; font-size: 1.125rem;">Tu información ha sido recibida de forma segura${isAnon ? ' <b>y totalmente anónima</b>' : ''} por la Delegación.</p>
+                    
+                    <div style="background: rgba(0,0,0,0.5); padding: 1.5rem; border-radius: 1rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.06);">
+                        <p style="font-size: 0.875rem; color: var(--gray-400); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Número de radicado</p>
+                        <p style="font-size: 2.25rem; font-family: monospace; font-weight: 700; color: var(--blue-400); letter-spacing: 0.1em;">${refNumber}</p>
+                    </div>
+                    
+                    <p style="font-size: 0.875rem; color: var(--gray-400); margin-bottom: 2rem; padding: 0 1rem;">Guarda este número. Úsalo en la sección de 'Trazabilidad' para ver el estado de tu caso.</p>
+                    
+                    <button onclick="closeModal(); navigate('trazabilidad'); document.getElementById('track-id').value='${refNumber}'; setTimeout(showTracking, 500);" class="modal-btn bg-green-600 hover-bg-green-500" style="padding: 1.25rem;">Consultar estado ahora</button>
+                </div>
+            `);
+        }
+
+        // Simulación de Trazabilidad
+        function showTracking() {
+            const trackId = document.getElementById('track-id').value;
+            if(!trackId.trim()) {
+                showSimpleMessage(`
+                    <div style="padding: 1rem;">
+                        <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">⚠️</span>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Número requerido</h3>
+                        <p style="color: var(--gray-300); margin-bottom: 1.5rem;">Por favor ingresa un número de radicado válido (Ej: DSR-2026-0847).</p>
+                        <button onclick="closeModal()" class="modal-btn bg-blue-600 hover-bg-blue-500">Entendido</button>
+                    </div>
+                `);
+                return;
+            }
+            const resultDiv = document.getElementById('tracking-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.style.opacity = '0';
+            
+            setTimeout(() => {
+                resultDiv.style.transition = 'opacity 0.6s ease';
+                resultDiv.style.opacity = '1';
+                resultDiv.querySelector('h3').innerText = trackId.toUpperCase();
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+        }
+
+        // Iniciar
+        window.onload = function() {
+            initTiltCards();
+            navigate('inicio');
+        };
+    </script>
+</body>
+</html>
